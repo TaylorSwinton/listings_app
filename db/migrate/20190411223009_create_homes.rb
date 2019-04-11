@@ -4,7 +4,7 @@ class CreateHomes < ActiveRecord::Migration
       t.string :home_address
       t.integer :bedroom
       t.integer :bathroom
-      t.integer :price
+      t.string :price
       t.text :description
       t.integer :user_id
 

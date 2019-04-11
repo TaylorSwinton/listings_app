@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :email
       t.string :password_digest #in order to encrypt
-      t.integer :phone_number
+      t.string :phone_number
       t.string :base_address
 
       t.timestamps null: false
