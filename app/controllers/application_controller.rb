@@ -13,4 +13,16 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
+  helpers do
+    
+    def logged_in?  
+      #true if user is logged in, otherwise false
+      !!current_user #double bang(!!) kind of turns it into boolean
+    end
+
+    def current_user
+      @current_user ||= User.find_by(id: session[:user_id]) #||= helos not hit the database everytime if current user is already filled.
+    end
+  end
+
 end
