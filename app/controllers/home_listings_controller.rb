@@ -13,7 +13,7 @@ class HomeListingsController < ApplicationController
         end
          #only save if the listing has content
         if params[:home_address] != "" && params[:bedroom] != "" && params[:bathroom] != "" && params[:price] != "" && params[:description] != ""
-            #create a new entry
+            #create a new listing
             @home_listing = Home.create(home_address: params[:home_address], bedroom: params[:bedroom], bathroom: params[:bathroom], price: params[:price], description: params[:description], user_id: current_user.id)
 
             redirect "/home_listings/#{@home_listing.id}"
@@ -22,9 +22,17 @@ class HomeListingsController < ApplicationController
         end
     end
     # show route for a home listing
-    get '/home_listings/' do
-
+    get '/home_listings/:id' do
+        @home_listing = Home.find(params[:id])
+        #redirects destroy instance variables!!!
+        erb :'/home_listings/show'
     end
 
     # index route for all home listings
+
+
+    # edit route for a home listing
+    get '/home_listings/:id/edit' do
+        erb :'/home_listings/edit'
+    end
 end

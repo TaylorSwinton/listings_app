@@ -1,1 +1,12 @@
-SHOW PAGE FOR A JOURNAL ENTRY
+
+
+<p>Address: <%= @home_listing.home_address %></p>
+<p>Bedroom: <%= @home_listing.bedroom %></p>
+<p>Bathroom: <%= @home_listing.bathroom %></p>
+<p>Price: $<%= @home_listing.price %></p>
+<p><%= @home_listing.description %></p>
+
+
+<a href="/home_listings/<%=@home_listing.id%>/edit">Edit Listing</a>
+
+Delete Link
