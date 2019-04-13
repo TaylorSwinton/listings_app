@@ -1,1 +1,19 @@
-INDEX PAGE FOR JOURNAL ENTRIES
+<h1>Home Listings</h1>
+<br>
+<% @home_listings.each do |home_listing|%>
+    <a href="/home_listings/<%=home_listing.id%>">Address: <%= home_listing.home_address %></a>
+    <br>
+    Bedrooms: <%= home_listing.bedroom %>
+    <br>
+    Bathrooms: <%= home_listing.bathroom %>
+    <br>
+    Price: <%= home_listing.price %>
+    <br>
+    Description: <%= home_listing.description %>
+    <br>
+    <br>
+<% end %>
+
+<%######ADD TO PROGRAM######%>
+    <%# Add title of home%>
+    <%# Add if home is active, sold, rented, under construction, in foreclousure%>

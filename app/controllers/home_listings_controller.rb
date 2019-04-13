@@ -30,15 +30,22 @@ class HomeListingsController < ApplicationController
 
     # *********PROBLEMS**********
     #ALSO, I can edit a journal entry to be blank!!
+    #remove nav bar if the user is NOT logged in.
+    ###make sure users can only see the listings they added !!
 
     # index route for all home listings
+    get '/home_listings' do
+        @home_listings = Home.all
+        
+        erb :'home_listings/index'
+    end
 
 
     # edit route for a home listing
     get '/home_listings/:id/edit' do
         set_home_listing
         if logged_in?
-            if @home_listing.user == current_user
+            if @home_listing.users == current_user
             erb :'/home_listings/edit'
             else
                 redirect "users/#{current_user.id}"
@@ -52,7 +59,7 @@ class HomeListingsController < ApplicationController
         # find the home listing
         set_home_listing
         if logged_in?
-            if @home_listing.user == current_user
+            if @home_listing.users == current_user
                 # update the home listing
                 @home_listing.update(home_address: params[:home_address], bedroom: params[:bedroom], bathroom: params[:bathroom], price: params[:price], description: params[:description])
                 

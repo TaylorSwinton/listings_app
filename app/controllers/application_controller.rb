@@ -27,6 +27,11 @@ class ApplicationController < Sinatra::Base
     def current_user
       @current_user ||= User.find_by(id: session[:user_id]) #||= helos not hit the database everytime if current user is already filled.
     end
+
+    def authorized_to_edit?(home_listing)
+      home_listing.users == current_user
+    end
+
   end
 
 end
