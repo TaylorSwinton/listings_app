@@ -9,4 +9,5 @@ use Rack::MethodOverride
 
 #here is where I mount other controllers (use)
 use UsersController
+use HomeListingsController
 run ApplicationController
