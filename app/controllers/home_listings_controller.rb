@@ -40,6 +40,19 @@ class HomeListingsController < ApplicationController
         erb :'home_listings/index'
     end
 
+    # delete route for a home listing
+    delete '/home_listings/:id' do
+        set_home_listing
+        if authorized_to_edit?(@home_listing)
+            #delete the listing
+            @home_listing.destroy
+            #redirect
+            redirect '/home_listings'
+        else
+            #redirect somewhere -- listing not deleted    
+            redirect '/home_listings'
+        end
+    end
 
     # edit route for a home listing
     get '/home_listings/:id/edit' do

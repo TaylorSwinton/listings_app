@@ -8,5 +8,10 @@
 
 <% if authorized_to_edit?(@home_listing) %>
     <a href="/home_listings/<%=@home_listing.id%>/edit">Edit Listing</a>
-    <a>Delete Listing</a>
+    <br>
+    <br>
+    <form action="/home_listings/<%=@home_listing.id%>" method ="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" name="" value="Delete Listing">
+    </form>
 <% end %>
