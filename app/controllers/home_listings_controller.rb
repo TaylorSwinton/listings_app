@@ -3,7 +3,7 @@ class HomeListingsController < ApplicationController
     get '/home_listings/new' do
         erb :'/home_listings/new'
     end
-    # post home to create a new journal entry
+    # post home to create a new home entry
     post '/home_listings' do
         #create a new home listing and save it to the DB
         #only save if is has some content
@@ -23,16 +23,53 @@ class HomeListingsController < ApplicationController
     end
     # show route for a home listing
     get '/home_listings/:id' do
-        @home_listing = Home.find(params[:id])
+        set_home_listing
         #redirects destroy instance variables!!!
         erb :'/home_listings/show'
     end
+
+    # *********PROBLEMS**********
+    #ALSO, I can edit a journal entry to be blank!!
 
     # index route for all home listings
 
 
     # edit route for a home listing
     get '/home_listings/:id/edit' do
-        erb :'/home_listings/edit'
+        set_home_listing
+        if logged_in?
+            if @home_listing.user == current_user
+            erb :'/home_listings/edit'
+            else
+                redirect "users/#{current_user.id}"
+            end
+        else
+            redirect '/'
+        end
     end
+
+    patch '/home_listings/:id' do
+        # find the home listing
+        set_home_listing
+        if logged_in?
+            if @home_listing.user == current_user
+                # update the home listing
+                @home_listing.update(home_address: params[:home_address], bedroom: params[:bedroom], bathroom: params[:bathroom], price: params[:price], description: params[:description])
+                
+                # redirect to the show page of modified listing
+                redirect "/home_listings/#{@home_listing.id}"
+            else
+                redirect "users/#{current_user.id}"
+            end
+        else
+            redirect '/'
+        end
+    end
+
+
+    private # private means this helper method can only be used in this     controller
+      def set_home_listing
+        @home_listing = Home.find(params[:id])
+      end
+
 end

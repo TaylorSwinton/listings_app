@@ -1,25 +1,28 @@
 Edit your listing
-<form method="post" action="/home_listings">
+<br>
+<br>
+<form method="post" action="/home_listings/<%=@home_listing.id%>">
+    <input type="hidden" name="_method" value="patch">
     <label>Address:
-        <input type="text" name="home_address" value="">
+        <input type="text" name="home_address" value="<%= @home_listing.home_address %>">
     </label>
     <br>
     <label>Bedrooms:
-        <input type="number" name="bedroom" value="">
+        <input type="number" name="bedroom" value="<%= @home_listing.bedroom %>">
     </label>
     <br>
     <label>Bathrooms:
-        <input type="number" name="bathroom" value="">
+        <input type="number" name="bathroom" value="<%= @home_listing.bathroom %>">
     </label>
     <br>
     <label>Price:
-        <input type="text" name="price" value="">
+        <input type="text" name="price" value="<%= @home_listing.price %>">
     </label>
     <br>
     <label>Description:
-        <input type="text" name="description" value="">
+        <input type="text" name="description" value="<%= @home_listing.description %>">
     </label>
     <br>
 
-    <input type="submit" name="" value="New Listing">
+    <input type="submit" name="" value="Edit Listing">
 </form>
